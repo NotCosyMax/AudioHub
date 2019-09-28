@@ -7,7 +7,7 @@ Wants=network-online.target
 After=network.target network-online.target
 
 [Service]
-ExecStart=/usr/local/bin/shairport-sync -c /home/max/shairport-conf-remRear
+ExecStart=/usr/local/bin/shairport-sync -c /usr/share/audiohub/shairport-conf-remRear
 User=shairport-sync
 Group=shairport-sync
 

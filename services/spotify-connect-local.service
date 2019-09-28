@@ -4,7 +4,7 @@ After=network-online.target
 [Service]
 Type=idle
 User=root
-ExecStart=/usr/sbin/librespot --name NeoHubLocal --cache /home/max/cache --bitrate 320 --backend alsa --device hw:CARD=CODEC --disable-discovery --username trixxer --password maxsaramusik > /dev/null 2>&1
+ExecStart=/usr/sbin/librespot --name NeoHubLocal --cache /home/max/cache --bitrate 320 --backend alsa --device hw:CARD=Loopback,DEV=0 --disable-discovery --username trixxer --password maxsaramusik > /dev/null 2>&1
 Restart=always
 RestartSec=10
 StartLimitInterval=30

@@ -4,7 +4,7 @@ After=network-online.target
 [Service]
 Type=idle
 User=root
-ExecStart=/usr/sbin/librespot --name NeoHubRemoteTwo --cache /home/max/cache --bitrate 320 --backend alsa --device ppRear --disable-discovery --username trixxer --password maxsaramusik > /dev/null 2>&1
+ExecStart=/usr/sbin/librespot --name NeoHubRemoteTwo --cache /home/max/cache --bitrate 320 --backend alsa --device hw:CARD=Loopback_2,DEV=0 --disable-discovery --username trixxer --password maxsaramusik > /dev/null 2>&1
 Restart=always
 RestartSec=10
 StartLimitInterval=30

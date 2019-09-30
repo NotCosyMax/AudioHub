@@ -80,9 +80,11 @@ try:
             samplerate=args.samplerate, blocksize=args.blocksize,
             device=args.output_device3, channels=args.channels, dtype=args.dtype, latency=args.latency3, callback=callback3)
         
+        sant = True
         with stream1_out:
             with stream2_out:
-                input()
+                while sant:
+                    time.sleep(60)
 
 except KeyboardInterrupt:
     parser.exit('\nInterrupted by user')

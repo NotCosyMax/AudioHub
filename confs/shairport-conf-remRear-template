@@ -4,7 +4,7 @@
 // General Settings
 general =
 {
-	name = "NeoHubRemoteTwo"; // This is the name the service will advertise to iTunes. The default is "Shairport Sync on <hostname>"
+	name = "DEV_NAME"; // This is the name the service will advertise to iTunes. The default is "Shairport Sync on <hostname>"
 //	password = "secret"; // leave this commented out if you don't want to require a password
 //	interpolation = "basic"; // aka "stuffing". Default is "basic", alternative is "soxr". Use "soxr" only if you have a reasonably fast processor.
 //	output_backend = "alsa"; // Run "shairport-sync -h" to get a list of all output_backends, e.g. "alsa", "pipe", "stdout". The default is the first one.

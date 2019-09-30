@@ -1,9 +1,3 @@
-# PurePath virtual devices
-pcm_slave.ppcard {
-    pcm "dmix:CARD=Headset" #NEO2
-    channels 4
-}
-
 
 pcm.usb_codec_dmix {
     type dmix
@@ -21,11 +15,10 @@ pcm.usb_codec_dmix {
     }
 }
 
-
 pcm.ppFront {
     type plug
     slave {
-        pcm "ppcard"
+        pcm "dmix:CARD=soundcard"
         channels 4
     }
     ttable.0.0 1
@@ -34,9 +27,8 @@ pcm.ppFront {
 
 pcm.ppRear {
     type plug
-    channels 2
     slave {
-        pcm "ppcard"
+        pcm "dmix:CARD=soundcard"
         channels 4
     }
     ttable.0.2 1
@@ -46,7 +38,7 @@ pcm.ppRear {
 pcm.ppAll {
     type plug
     slave {
-         pcm "ppcard"
+         pcm "dmix:CARD=soundcard"
          channels 4
     }
     ttable.0.0 1

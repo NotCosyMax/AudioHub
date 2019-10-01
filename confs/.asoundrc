@@ -11,7 +11,7 @@ pcm.usb_codec_dmix {
         period_time 0
         period_size 1024
         buffer_time 0
-        buffer_size 4096
+        buffer_size 32768
     }
 }
 
@@ -98,7 +98,7 @@ pcm.softvol_rem1_shairport {
         pcm         "ppFront"
     }
     control {
-        name        "softvol_locshair"
+        name        "softvol_rem1shair"
         card        0
     }
 }
@@ -109,7 +109,7 @@ pcm.softvol_rem2_shairport {
         pcm         "ppRear"
     }
     control {
-        name        "softvol_locshair"
+        name        "softvol_rem2shair"
         card        0
     }
 }

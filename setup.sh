@@ -36,7 +36,7 @@ echo "Setup application configurations and scripts, copy templates"
 mkdir /usr/share/audiohub
 mkdir /usr/share/spotcache
 cp -r ./confs/shairport-* /usr/share/audiohub/
-cp -r scripts/* /usr/share/audiohub/*
+cp -r scripts/* /usr/share/audiohub/
 cp bin/librespot /usr/sbin/librespot
 cp services/spotify-connect-template.service /usr/share/audiohub/spotify-connect-template.service
 cp services/sound-splitter-spotify-connect-template.service /usr/share/audiohub/sound-splitter-spotify-connect-template.service
@@ -67,9 +67,9 @@ cp services/shairport-sync-* /etc/systemd/system
 /bin/bash /usr/share/audiohub/update_spotify_service.sh $DEV_NAME_SPOT $SPOT_USER $SPOT_PASS
 # Copy and setup sound splitter services
 cp /usr/share/audiohub/sound-splitter-spotify-connect-template.service /etc/systemd/system/sound-splitter-spotify-connect.service
-cp /usr/share/audiohub/sound-splitter-aux-template.service /etc/systemd/system/sound-splitter-aux-template.service
-sed -i -e s/ACTUAL_USER/"${USER}"/g /usr/share/audiohub/shairport-conf-local-template
-sed -i -e s/ACTUAL_USER/"${USER}"/g /usr/share/audiohub/shairport-conf-local-template
+cp /usr/share/audiohub/sound-splitter-aux-template.service /etc/systemd/system/sound-splitter-aux.service
+sed -i -e s/ACTUAL_USER/"${USER}"/g /etc/systemd/system/sound-splitter-spotify-connect.service
+sed -i -e s/ACTUAL_USER/"${USER}"/g /etc/systemd/system/sound-splitter-aux.service
 
 # Setup shairport configurations from tempalates
 /bin/bash /usr/share/audiohub/update_shairport_confs.sh $DEV_NAME_MAIN $DEV_NAME_REM1 $DEV_NAME_REM2
@@ -85,4 +85,5 @@ sudo systemctl start shairport-sync-local.service
 sudo systemctl start shairport-sync-ppfront.service
 sudo systemctl start shairport-sync-pprear.service
 sudo systemctl start spotify-connect.service
+sudo systemctl start sound-splitter-spotify-connect.service
 sudo systemctl start sound-splitter-aux.service

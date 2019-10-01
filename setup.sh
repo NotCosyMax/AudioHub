@@ -36,7 +36,7 @@ echo "Setup application configurations and scripts, copy templates"
 mkdir /usr/share/audiohub
 mkdir /usr/share/spotcache
 cp -r ./confs/shairport-* /usr/share/audiohub/
-cp scripts/* /usr/share/audiohub/*
+cp -r scripts/* /usr/share/audiohub/*
 cp bin/librespot /usr/sbin/librespot
 cp services/spotify-connect-template.service /usr/share/audiohub/spotify-connect-template.service
 cp services/sound-splitter-spotify-connect-template.service /usr/share/audiohub/sound-splitter-spotify-connect-template.service

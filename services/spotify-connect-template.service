@@ -4,7 +4,7 @@ After=network-online.target
 [Service]
 Type=idle
 User=root
-ExecStart=/usr/sbin/librespot --name DEV_NAME --cache /usr/share/spotcache --bitrate 320 --backend alsa --device hw:CARD=Loopback,DEV=0 --disable-discovery --username SPOT_USER --password SPOT_PASS > /dev/null 2>&1
+ExecStart=/usr/sbin/librespot --name DEV_NAME --cache /usr/share/spotcache --bitrate 320 --backend alsa --device spotify_out --disable-discovery --username SPOT_USER --password SPOT_PASS > /dev/null 2>&1
 Restart=always
 RestartSec=10
 StartLimitInterval=30

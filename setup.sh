@@ -5,9 +5,7 @@ apt-get -y install python3 python3-pip python3-dev python3-setuptools python3-nu
 apt-get -y install build-essential git xmltoman autoconf automake libtool libdaemon-dev libpopt-dev libconfig-dev libasound2-dev avahi-daemon libavahi-client-dev libssl-dev libsoxr-dev
 pip3 install sounddevice
 
-echo Setup alsa and loopback devices
-echo 'snd-aloop' >> /etc/modules
-cp confs/sound.conf /etc/modprobe.d/sound.conf
+echo Configure alsa
 cp confs/.asoundrc /usr/share/alsa/.asoundrc
 cp confs/alsa.conf /usr/share/alsa/alsa.conf
 
@@ -39,16 +37,11 @@ cp -r ./confs/shairport-* /usr/share/audiohub/
 cp -r scripts/* /usr/share/audiohub/
 cp bin/librespot /usr/sbin/librespot
 cp services/spotify-connect-template.service /usr/share/audiohub/spotify-connect-template.service
-cp services/sound-splitter-spotify-connect-template.service /usr/share/audiohub/sound-splitter-spotify-connect-template.service
-cp services/sound-splitter-aux-template.service /usr/share/audiohub/sound-splitter-aux-template.service
-
 cp confs/shairport-conf-local-template /usr/share/audiohub/shairport-conf-local-template
 cp confs/shairport-conf-remFront-template /usr/share/audiohub/shairport-conf-remFront-template 
 cp confs/shairport-conf-remRear-template /usr/share/audiohub/shairport-conf-remRear-template 
 
 # Gather some user input to complete service setup
-echo "What is the name of your user: "
-read USER
 echo "What do you want to call your main audiohub (The name that will show up in AirPlay, e.q: Livingroom):"
 read DEV_NAME_MAIN
 echo "What do you want to call remote audio sink one (The name that will show up in AirPlay, e.g: Another room):"
@@ -63,13 +56,10 @@ echo "What is your spotify password?"
 read SPOT_PASS
 
 cp services/shairport-sync-* /etc/systemd/system
+cp services/wire-* /etc/systemd/system
+
 # Copy Spotify service template and update with the given input
 /bin/bash /usr/share/audiohub/update_spotify_service.sh $DEV_NAME_SPOT $SPOT_USER $SPOT_PASS
-# Copy and setup sound splitter services
-cp /usr/share/audiohub/sound-splitter-spotify-connect-template.service /etc/systemd/system/sound-splitter-spotify-connect.service
-cp /usr/share/audiohub/sound-splitter-aux-template.service /etc/systemd/system/sound-splitter-aux.service
-sed -i -e s/ACTUAL_USER/"${USER}"/g /etc/systemd/system/sound-splitter-spotify-connect.service
-sed -i -e s/ACTUAL_USER/"${USER}"/g /etc/systemd/system/sound-splitter-aux.service
 
 # Setup shairport configurations from tempalates
 /bin/bash /usr/share/audiohub/update_shairport_confs.sh $DEV_NAME_MAIN $DEV_NAME_REM1 $DEV_NAME_REM2
@@ -79,11 +69,9 @@ sudo systemctl enable shairport-sync-local.service
 sudo systemctl enable shairport-sync-ppfront.service
 sudo systemctl enable shairport-sync-pprear.service
 sudo systemctl enable spotify-connect.service
-sudo systemctl enable sound-splitter-spotify-connect.service
-sudo systemctl enable sound-splitter-aux.service
+sudo systemctl enable wire-aux.service
 sudo systemctl start shairport-sync-local.service
 sudo systemctl start shairport-sync-ppfront.service
 sudo systemctl start shairport-sync-pprear.service
 sudo systemctl start spotify-connect.service
-sudo systemctl start sound-splitter-spotify-connect.service
-sudo systemctl start sound-splitter-aux.service
+sudo systemctl start wire-aux.service

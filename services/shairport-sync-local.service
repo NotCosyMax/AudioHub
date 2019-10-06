@@ -8,7 +8,7 @@ After=network.target network-online.target
 
 [Service]
 ExecStart=/usr/local/bin/shairport-sync -c /usr/share/audiohub/shairport-conf-local
-User=shairport-sync
+User=root
 Group=shairport-sync
 
 [Install]

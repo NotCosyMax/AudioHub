@@ -9,16 +9,29 @@ pcm.usb_codec_dmix {
         rate 44100
         channels 2
         period_time 0
-        period_size 1024
+        period_size 5513
+    }
+}
+
+pcm.pp_dmix {
+    type dmix
+    ipc_key 2048
+    ipc_key_add_uid false # let multiple users share
+    ipc_perm 0660 # IPC permissions (octal, default 0600)
+    slave {
+        pcm "hw:CARD=soundcard" # see below
+        rate 44100
+        period_time 0
+        period_size 5513
         buffer_time 0
-        buffer_size 32768
+        buffer_size 16539
     }
 }
 
 pcm.ppFront {
     type plug
     slave {
-        pcm "dmix:CARD=soundcard"
+        pcm "pp_dmix"
         channels 4
     }
     ttable.0.0 1
@@ -28,21 +41,9 @@ pcm.ppFront {
 pcm.ppRear {
     type plug
     slave {
-        pcm "dmix:CARD=soundcard"
+        pcm "pp_dmix"
         channels 4
     }
-    ttable.0.2 1
-    ttable.1.3 1
-}
-
-pcm.ppAll {
-    type plug
-    slave {
-         pcm "dmix:CARD=soundcard"
-         channels 4
-    }
-    ttable.0.0 1
-    ttable.1.1 1
     ttable.0.2 1
     ttable.1.3 1
 }
@@ -158,3 +159,78 @@ pcm.dummy {
         card        0
     }
 }
+
+pcm.spotify_multi {
+    type multi;
+    slaves.a.pcm "softvol_local_spotify";
+    slaves.a.channels 2;
+    slaves.b.pcm "softvol_rem1_spotify";
+    slaves.b.channels 2;
+    slaves.c.pcm "softvol_rem2_spotify";
+    slaves.c.channels 2;
+    bindings.0.slave a;
+    bindings.0.channel 0;
+    bindings.1.slave a;
+    bindings.1.channel 1;
+    bindings.2.slave b;
+    bindings.2.channel 0;
+    bindings.3.slave b;
+    bindings.3.channel 1;
+    bindings.4.slave c;
+    bindings.4.channel 0;
+    bindings.5.slave c;
+    bindings.5.channel 1;
+}
+
+pcm.spotify_out {
+    type plug;
+    slave.pcm "spotify_multi";
+    ttable.0.0 1;
+    ttable.1.1 1;
+    ttable.0.2 1;
+    ttable.1.3 1;
+    ttable.1.4 1;
+    ttable.1.5 1;
+}
+ctl.spotify_out {
+    type hw;
+    card 0;
+}
+
+pcm.aux_multi {
+    type multi;
+    slaves.a.pcm "softvol_local_aux";
+    slaves.a.channels 2;
+    slaves.b.pcm "softvol_rem1_aux";
+    slaves.b.channels 2;
+    slaves.c.pcm "softvol_rem2_aux";
+    slaves.c.channels 2;
+    bindings.0.slave a;
+    bindings.0.channel 0;
+    bindings.1.slave a;
+    bindings.1.channel 1;
+    bindings.2.slave b;
+    bindings.2.channel 0;
+    bindings.3.slave b;
+    bindings.3.channel 1;
+    bindings.4.slave c;
+    bindings.4.channel 0;
+    bindings.5.slave c;
+    bindings.5.channel 1;
+}
+
+pcm.aux_out {
+    type plug;
+    slave.pcm "aux_multi";
+    ttable.0.0 1;
+    ttable.1.1 1;
+    ttable.0.2 1;
+    ttable.1.3 1;
+    ttable.1.4 1;
+    ttable.1.5 1;
+}
+ctl.aux_out {
+    type hw;
+    card 0;
+}
+

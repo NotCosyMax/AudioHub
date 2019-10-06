@@ -42,6 +42,8 @@ cp confs/shairport-conf-remFront-template /usr/share/audiohub/shairport-conf-rem
 cp confs/shairport-conf-remRear-template /usr/share/audiohub/shairport-conf-remRear-template 
 
 # Gather some user input to complete service setup
+echo "What is the name of your user?"
+read MY_USER
 echo "What do you want to call your main audiohub (The name that will show up in AirPlay, e.q: Livingroom):"
 read DEV_NAME_MAIN
 echo "What do you want to call remote audio sink one (The name that will show up in AirPlay, e.g: Another room):"
@@ -57,6 +59,7 @@ read SPOT_PASS
 
 cp services/shairport-sync-* /etc/systemd/system
 cp services/wire-* /etc/systemd/system
+sed -i -e s/ACTUAL_USER/"${MY_USER}"/g /etc/systemd/system/wire-aux.service
 
 # Copy Spotify service template and update with the given input
 /bin/bash /usr/share/audiohub/update_spotify_service.sh $DEV_NAME_SPOT $SPOT_USER $SPOT_PASS

@@ -6,7 +6,7 @@ After=spotify-connect.service
 
 [Service]
 ExecStart=/usr/bin/python3 /usr/share/audiohub/wire.py -dtype int16 -i 'USB AUDIO CODEC' -o aux_out --samplerate 44100 -b 1024
-User=root
+User=ACTUAL_USER
 Restart=always
 RestartSec=10
 StartLimitInterval=30

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+    <head>
+        <meta charset="utf-8">
+            <title>
+                AudioHub Web Controller
+            </title>
+            <link href="{{ url_for('static',     filename='style.css') }}" rel="stylesheet"></link>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+            </script>
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript">
+            </script>
+        </meta>
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <h1>
+                    AudioHub Web Controller
+                </h1>
+            </div>
+        </header>
+        <div class="device_cont">
+            <div class="device_header" onclick="toggle('1')">
+                <ul>
+                    <li>
+                        {{ device_name_1|safe }}
+                        {% if expand_1 == True %}
+                        <span class="expand">⌃</span>
+                        {% else %}
+                        <span class="expand">⌄</span>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+            <div class="device_body" id="1">
+                <table class="device_table">
+                    <tr>
+                        <td><img height=80px src="{{ url_for('static',     filename='images/spotify.png') }}"></td>
+                        <td width=90%>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="255" value={{ spot_val_1|safe }} class="slider" id="spot_1" onchange="save()">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img height=80px src="{{ url_for('static',     filename='images/airplay.png') }}"></td>
+                        <td width=90%>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="255" value={{ air_val_1|safe }} class="slider" id="air_1" onchange="save()">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img height=80px src="{{ url_for('static',     filename='images/aux.png') }}"></td>
+                        <td width=90%>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="255" value={{ aux_val_1|safe }} class="slider" id="aux_1" onchange="save()">
+                            </div>
+                        </td>
+                    </tr>
+                    <!--
+                    <tr>
+                        <td colspan="2"><button class="button_save" value="save" onclick="save()">Save</button></td>
+                    </tr>
+                    -->
+                </table>
+            </div>
+        </div>
+        <div class="device_cont">
+            <div class="device_header" onclick="toggle('2')">
+                <ul>
+                    <li>
+                        {{ device_name_2|safe }}
+                        {% if expand_2 == True %}
+                        <span class="expand">⌃</span>
+                        {% else %}
+                        <span class="expand">⌄</span>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+            <div class="device_body" id="2">
+                <table class="device_table">
+                    <tr>
+                        <td><img height=80px src="{{ url_for('static',     filename='images/spotify.png') }}"></td>
+                        <td width=90%>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="255" value={{ spot_val_2|safe }} class="slider" id="spot_2" onchange="save()">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img height=80px src="{{ url_for('static',     filename='images/airplay.png') }}"></td>
+                        <td width=90%>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="255" value={{ air_val_2|safe }} class="slider" id="air_2" onchange="save()">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img height=80px src="{{ url_for('static',     filename='images/aux.png') }}"></td>
+                        <td width=90%>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="255" value={{ aux_val_2|safe }} class="slider" id="aux_2" onchange="save()">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="device_cont">
+            <div class="device_header" onclick="toggle('3')">
+                <ul>
+                    <li>
+                        {{ device_name_3|safe }}
+                        {% if expand_3 == True %}
+                        <span class="expand">⌃</span>
+                        {% else %}
+                        <span class="expand">⌄</span>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+            <div class="device_body" id="3">
+                <table class="device_table">
+                    <tr>
+                        <td><img height=80px src="{{ url_for('static',     filename='images/spotify.png') }}"></td>
+                        <td width=90%>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="255" value={{ spot_val_3|safe }} class="slider" id="spot_3" onchange="save()">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img height=80px src="{{ url_for('static',     filename='images/airplay.png') }}"></td>
+                        <td width=90%>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="255" value={{ air_val_3|safe }} class="slider" id="air_3" onchange="save()">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><img height=80px src="{{ url_for('static',     filename='images/aux.png') }}"></td>
+                        <td width=90%>
+                            <div class="slidecontainer">
+                                <input type="range" min="0" max="255" value={{ aux_val_3|safe }} class="slider" id="aux_3" onchange="save()">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="device_cont">
+            <div class="device_header"><ul><li>Misc</li></ul></div>
+            <div class="misc_body" id="3">
+                <button class="button_save" value="restart_spotify" onclick="restart_spotify()">Restart Spotify Service</button>
+                <button class="button_save" value="restart_aux" onclick="restart_aux()">Restart AUX Service</button>
+                <button class="button_save" value="reboot_device" onclick="reboot()">Reboot Hub</button>
+            </div>
+        </div>
+        <script>
+
+            (function () {
+                if (!is_expanded('1')) {
+                    hide('1')
+                }
+                if (!is_expanded('2')) {
+                    hide('2')
+                }
+                if (!is_expanded('3')) {
+                    hide('3')
+                }
+            })();
+
+            function post(path, parameters) {
+                var form = $('<form></form>');
+
+                form.attr("method", "post");
+                form.attr("action", path);
+
+                $.each(parameters, function(key, value) {
+                    var field = $('<input></input>');
+
+                    field.attr("type", "hidden");
+                    field.attr("name", key);
+                    field.attr("value", value);
+
+                    form.append(field);
+                });
+
+                // The form needs to be a part of the document in
+                // order for us to be able to submit it.
+                $(document.body).append(form);
+                form.submit();
+            }
+
+            function expand(id) {
+                var div = document.getElementById(id)
+                var button = div.previousElementSibling.firstElementChild.firstElementChild.lastElementChild
+                div.style.display = 'inline';
+                button.innerHTML = "⌃"
+            }
+
+            function hide(id) {
+                var div = document.getElementById(id)
+                var button = div.previousElementSibling.firstElementChild.firstElementChild.lastElementChild
+                div.style.display = 'none';
+                button.innerHTML = '⌄' 
+            }
+
+            function toggle(id) {
+                var div = document.getElementById(id)
+                var button = div.previousElementSibling.firstElementChild.firstElementChild.lastElementChild
+                if (button.innerHTML == "⌄") {
+                    expand(id)
+                } else {
+                    hide(id)
+                }
+                
+            }
+
+            function is_expanded(id) {
+                var div = document.getElementById(id)
+                var button = div.previousElementSibling.firstElementChild.firstElementChild.lastElementChild
+                if (button.innerHTML == "⌃") {
+                    return true
+                } else {
+                    return false
+                }
+            }
+
+            function save() {
+                    var spot_1 = document.getElementById("spot_1").value
+                    var spot_2 = document.getElementById("spot_2").value
+                    var spot_3 = document.getElementById("spot_3").value
+                    var air_1 = document.getElementById("air_1").value
+                    var air_2 = document.getElementById("air_2").value
+                    var air_3 = document.getElementById("air_3").value
+                    var aux_1 = document.getElementById("aux_1").value
+                    var aux_2 = document.getElementById("aux_2").value
+                    var aux_3 = document.getElementById("aux_3").value
+                    post('/', {_method: 'save', _spot_1: spot_1, _spot_2: spot_2, _spot_3: spot_3,
+                                                _air_1: air_1, _air_2: air_2, _air_3: air_3,
+                                                _aux_1: aux_1, _aux_2: aux_2, _aux_3: aux_3,
+                                                _exp_1: is_expanded(1),
+                                                _exp_2: is_expanded(2),
+                                                _exp_3: is_expanded(3)});
+            }
+
+            function restart_spotify() {
+                post('/', {_method: 'restart_spotify'});
+            }
+
+            function restart_aux() {
+                post('/', {_method: 'restart_aux'});
+            }
+
+            function reboot() {
+                post('/', {_method: 'reboot'});
+            }
+
+        </script>   
+    </body>
+</html>

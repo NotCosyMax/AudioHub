@@ -1,0 +1,100 @@
+* {
+  box-sizing: border-box;
+  text-align: center;
+  font-family: "Arial", sans-serif;
+  color: white;
+}
+
+body {
+  background-image: url("images/bg.png");
+}
+
+.device_cont {
+  background-color: rgba(201, 76, 76, 0.3);;
+  border: 2px solid black;
+  border-radius: 8px;
+  width:90%;
+  margin-left:auto; 
+  margin-right:auto;
+  margin-top: 10px;
+
+}
+
+/* Style the list (remove margins and bullets, etc) */
+.device_cont ul {
+  cursor: pointer;
+  list-style-type: none;
+  margin: 0;
+  text-align: center;
+  border: 0px;
+  padding: 0px;
+  text-decoration: none;
+  font-size: 30px;
+  color: black;
+  width: 100%;
+  display: inline-block;
+  position: relative;
+}
+
+/* Style the close button (span) */
+.expand {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 0%;
+  padding: 12px 16px;
+  transform: translate(0%, -50%);
+}
+
+.expand:hover {background: rgba(0, 0, 0, 0.1e)}
+
+.device_table {
+  width: 90%;
+  margin-left:auto; 
+  margin-right:auto;
+}
+
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 15px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4CAF50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.button_save {
+  margin-left:auto; 
+  margin-right:auto;
+  color: black;
+}

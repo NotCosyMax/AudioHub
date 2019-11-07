@@ -105,7 +105,7 @@ class AudioHubWebServer():
                 call(["/sbin/reboot"])
                 pass
             elif method == "shutdown":
-                call([/sbin/halt])
+                call(["/sbin/halt"])
                 pass
         else:
             expand_1 = False

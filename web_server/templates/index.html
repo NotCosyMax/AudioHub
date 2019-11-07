@@ -157,6 +157,7 @@
                 <button class="button_save" value="restart_spotify" onclick="restart_spotify()">Restart Spotify Service</button>
                 <button class="button_save" value="restart_aux" onclick="restart_aux()">Restart AUX Service</button>
                 <button class="button_save" value="reboot_device" onclick="reboot()">Reboot Hub</button>
+                <button class="button_save" value="shutdown_device" onclick="shutdown()">Shutdown Hub</button>
             </div>
         </div>
         <script>
@@ -258,6 +259,10 @@
 
             function reboot() {
                 post('/', {_method: 'reboot'});
+            }
+
+            function shutdown() {
+                post('/', {_method: 'shutdown'});
             }
 
         </script>   

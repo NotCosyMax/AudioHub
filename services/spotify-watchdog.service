@@ -1,11 +1,11 @@
 [Unit]
-Description=AUX sound router service
+Description=Spotify Connect Watchdog Service
 After=sound.target
 After=network.target network-online.target
 After=spotify-connect.service
 
 [Service]
-ExecStart=/usr/bin/python3 /usr/share/audiohub/wire.py -dtype int16 -i 'USB AUDIO CODEC' -o aux_out --samplerate 44100 -b 1024
+ExecStart=/usr/bin/python3 /usr/share/audiohub/spotify_watchdog.py
 User=root
 Restart=always
 RestartSec=10

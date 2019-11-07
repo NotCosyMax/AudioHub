@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template
 import logging
 import sys
-import ConfigParser
+import configparser
 from subprocess import call
 import time
 
@@ -15,7 +15,7 @@ class AudioHubWebServer():
     def __init__(self, ip, conf_file):
         self.host_ip = ip
         self.config_file = conf_file
-        self.config = ConfigParser.ConfigParser()
+        self.config = configparser.ConfigParser()
 
         self.app = app
         self.route_wrapped = self.app.route('/', methods=['GET', 'POST'])(self.render)
@@ -34,7 +34,7 @@ class AudioHubWebServer():
         return dict1
 
     def start(self):
-        self.app.run(debug=True, host=self.host_ip)
+        self.app.run(debug=True, host=self.host_ip, port=8000)
 
     def render(self):
         # Read in config file
@@ -63,25 +63,25 @@ class AudioHubWebServer():
             # Selected profile changed
             if method == "save":
                 # Get values
-                spot_val_1 = int(request.form.get('_spot_1'))
-                air_val_1 = int(request.form.get('_air_1'))
-                aux_val_1 = int(request.form.get('_aux_1'))
-                spot_val_2 = int(request.form.get('_spot_2'))
-                air_val_2 = int(request.form.get('_air_2'))
-                aux_val_2 = int(request.form.get('_aux_2'))
-                spot_val_3 = int(request.form.get('_spot_3'))
-                air_val_3 = int(request.form.get('_air_3'))
-                aux_val_3 = int(request.form.get('_aux_3'))
+                spot_val_1 = str(request.form.get('_spot_1'))
+                air_val_1 = str(request.form.get('_air_1'))
+                aux_val_1 = str(request.form.get('_aux_1'))
+                spot_val_2 = str(request.form.get('_spot_2'))
+                air_val_2 = str(request.form.get('_air_2'))
+                aux_val_2 = str(request.form.get('_aux_2'))
+                spot_val_3 = str(request.form.get('_spot_3'))
+                air_val_3 = str(request.form.get('_air_3'))
+                aux_val_3 = str(request.form.get('_aux_3'))
                 # Set mixers
-                call(["/usr/bin/amixer", "-q", "set", "softvol_locspot", str(spot_val_1)])
-                call(["/usr/bin/amixer", "-q", "set", "softvol_locshair", str(air_val_1)])
-                call(["/usr/bin/amixer", "-q", "set", "softvol_locaux", str(aux_val_1)])
-                call(["/usr/bin/amixer", "-q", "set", "softvol_rem1spot", str(spot_val_2)])
-                call(["/usr/bin/amixer", "-q", "set", "softvol_rem1shair", str(air_val_2)])
-                call(["/usr/bin/amixer", "-q", "set", "softvol_rem1aux", str(aux_val_2)])
-                call(["/usr/bin/amixer", "-q", "set", "softvol_rem2spot", str(spot_val_3)])
-                call(["/usr/bin/amixer", "-q", "set", "softvol_rem2shair", str(air_val_3)])
-                call(["/usr/bin/amixer", "-q", "set", "softvol_rem2aux", str(aux_val_3)])
+                call(["/usr/bin/amixer", "-q", "set", "softvol_locspot", spot_val_1])
+                call(["/usr/bin/amixer", "-q", "set", "softvol_locshair", air_val_1])
+                call(["/usr/bin/amixer", "-q", "set", "softvol_locaux", aux_val_1])
+                call(["/usr/bin/amixer", "-q", "set", "softvol_rem1spot", spot_val_2])
+                call(["/usr/bin/amixer", "-q", "set", "softvol_rem1shair", air_val_2])
+                call(["/usr/bin/amixer", "-q", "set", "softvol_rem1aux", aux_val_2])
+                call(["/usr/bin/amixer", "-q", "set", "softvol_rem2spot", spot_val_3])
+                call(["/usr/bin/amixer", "-q", "set", "softvol_rem2shair", air_val_3])
+                call(["/usr/bin/amixer", "-q", "set", "softvol_rem2aux", aux_val_3])
                 # Store in config file
                 self.config.set('DeviceOne', 'spotify_volume', spot_val_1)
                 self.config.set('DeviceOne', 'shairport_volume', air_val_1)
@@ -96,13 +96,16 @@ class AudioHubWebServer():
                 self.config.write(conffile)
                 conffile.close()
             elif method == "restart_spotify":
-                #call(["/usr/bin/amixer", "-q", "set", "softvol_locspot", str(spot_val_1)])
+                call(["/bin/systemctl", "restart", "spotify-connect.service"])
                 pass
             elif method == "restart_aux":
-                #call(["/usr/bin/amixer", "-q", "set", "softvol_locspot", str(spot_val_1)])
+                call(["/bin/systemctl", "restart", "wire-aux.service"])
                 pass
             elif method == "reboot":
-                #call(["/usr/bin/amixer", "-q", "set", "softvol_locspot", str(spot_val_1)])
+                call(["/sbin/reboot"])
+                pass
+            elif method == "shutdown":
+                call([/sbin/halt])
                 pass
         else:
             expand_1 = False

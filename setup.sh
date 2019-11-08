@@ -12,7 +12,7 @@ sudo systemctl stop web-server.service
 echo "Install dependencies"
 apt-get -y update
 apt-get -y install python3 python3-pip python3-dev python3-setuptools python3-numpy python3-flask libffi-dev 
-apt-get -y install build-essential git xmltoman autoconf automake libtool libdaemon-dev libpopt-dev libconfig-dev libasound2-dev avahi-daemon libavahi-client-dev libssl-dev libsoxr-dev
+apt-get -y install build-essential git xmltoman autoconf automake libtool libdaemon-dev libpopt-dev libconfig-dev libasound2-dev avahi-daemon libavahi-client-dev libssl-dev libsoxr-dev libportaudio2
 sudo pip3 install sounddevice
 sudo pip3 install configparser
 
@@ -54,6 +54,8 @@ cp services/spotify-connect-template.service /usr/share/audiohub/spotify-connect
 cp confs/shairport-conf-local-template /usr/share/audiohub/shairport-conf-local-template
 cp confs/shairport-conf-remFront-template /usr/share/audiohub/shairport-conf-remFront-template 
 cp confs/shairport-conf-remRear-template /usr/share/audiohub/shairport-conf-remRear-template 
+#Setup permissions for librespot
+chmod 755 /usr/sbin/librespot
 
 # Gather some user input to complete service setup
 #echo "What is the name of your user?"
